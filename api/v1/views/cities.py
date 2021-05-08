@@ -12,20 +12,19 @@ from models.city import City
 def get_all_cities_of_state(state_id):
     """ retrieves list of all city objs of spec State """
     cities_list = []
-    print(state_id)
     s_id = storage.get(State, state_id)
     if not s_id:
         abort(404)
     for city in storage.all(City).values():
         if city.state_id == state_id:
             cities_list.append(city.to_dict())
-    return make_response(jsonify(cities_list, 200))
+    return make_response(jsonify(cities_list), 200)
 
 
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
 def get_city(city_id):
     """ retrieves one single city object """
-    c_id = storage.get(City, state_id)
+    c_id = storage.get(City, city_id)
     if not c_id:
         abort(404)
     return make_response(jsonify(c_id.to_dict()), 200)
