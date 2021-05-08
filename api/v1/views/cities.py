@@ -70,7 +70,7 @@ def update_city(city_id):
         return make_response(jsonify({'error': "Not a JSON"}), 400)
     content = request.get_json()
     for k, v in content.items():
-        if k not in ['id', 'state_id', 'created_at', 'updated_at']:
+        if k in ['id', 'state_id', 'created_at', 'updated_at']:
             pass
         else:
             setattr(c_id, k, v)
