@@ -68,6 +68,6 @@ def update_user(user_id):
         if k in ['id', 'email', 'created_at', 'updated_at']:
             pass
         else:
-            setattr(s_id, k, v)
+            setattr(u_id, k, v)
     storage.save()
     return make_response(jsonify(u_id.to_dict()), 200)
