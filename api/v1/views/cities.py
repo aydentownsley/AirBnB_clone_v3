@@ -60,7 +60,7 @@ def create_city(state_id):
     return make_response(jsonify(new_city.to_dict()), 201)
 
 
-@app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/cities/<city_id>/', methods=['PUT'], strict_slashes=False)
 def update_city(city_id):
     """ updates one single state object """
     c_id = storage.get(City, city_id)
@@ -70,9 +70,9 @@ def update_city(city_id):
         return make_response(jsonify({'error': "Not a JSON"}), 400)
     content = request.get_json()
     for k, v in content.items():
-        if k in ['id', 'created_at', 'updated_at']:
+        if k not in ['id', 'state_id', 'created_at', 'updated_at']:
             pass
         else:
-            setattr(s_id, k, v)
+            setattr(c_id, k, v)
     storage.save()
-    return make_response(jsonify(s_id.to_dict()), 200)
+    return make_response(jsonify(c_id.to_dict()), 200)
