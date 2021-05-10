@@ -62,10 +62,10 @@ def create_review(place_id):
     if not u_id:
         abort(404)
     if "text" not in review_req:
-        return make_response(jsonify({'error': "Missing name"}), 400)
+        return make_response(jsonify({'error': "Missing text"}), 400)
     new_review = Review()
     new_review.user_id = review_req['user_id']
-    new_review.place_id = p_id
+    new_review.place_id = place_id
     new_review.text = review_req['text']
     new_review.save()
     return make_response(jsonify(new_review.to_dict()), 201)
