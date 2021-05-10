@@ -11,7 +11,7 @@ from flask import jsonify, request, abort, make_response
 from api.v1.views import app_views
 
 
-@app_views.route('places/<place_id>/reviews', methods=['GET'],
+@app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
 def all_reviews_by_place(place_id):
     """Display list of reviews from a spec place"""
@@ -38,7 +38,7 @@ def get_review(review_id):
 
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
-def del_place(review_id):
+def del_review(review_id):
     """Deletes a review by review_id"""
     r_id = storage.get(Review, review_id)
     if not r_id:
@@ -48,7 +48,7 @@ def del_place(review_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('places/<place_id>/reviews', methods=['POST'],
+@app_views.route('/places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
 def create_review(place_id):
     """creates one single review given spec place"""
